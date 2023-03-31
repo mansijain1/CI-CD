@@ -1,17 +1,22 @@
 pipeline {
    agent any
    stages {
-        stage ('Production') {
+      stage('clone'){
+            steps{
+            git branch:'Testing' , url:'https://github.com/mansijain1knoldus/CI-CD-Capstone.git'
+            }
+      }
+      stage ('Production') {
             steps {
                 echo 'Production is successful'
             }
-        }
-        stage ('Testing') {
+      }
+      stage ('Testing') {
             steps {
                 echo "Testing is successful"
             }
-        }
-        stage ('Development') {
+      }
+      stage ('Development') {
             steps {
                 echo "Development is successful"
             }
