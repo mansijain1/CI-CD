@@ -6,21 +6,23 @@ pipeline {
             git branch:'main' , url:'https://github.com/mansijain1knoldus/CI-CD-Capstone.git'
             }
       }
-      stage ('Production') {
+      stage ('Development') {
             steps {
-               echo 'Production is successful'
-               echo 'Webhook'
+               sh 'mvn clean install -Dmaven.test.skip=true'
+               echo "Development is successful"
             }
-      }
+        }
       stage ('Testing') {
             steps {
                 echo "Testing is successful"
             }
       }
-      stage ('Development') {
+      stage ('Production') {
             steps {
-                echo "Development is successful"
+               deploy adapters: [tomcat9(credentialsId: 'TomcatCreds', path: '', url: 'http://3.27.9.223:7070/')], contextPath: 'capstoneapp', war: ''
+               echo 'Production is successful'
+
             }
-        }
+      }
    }
 }
