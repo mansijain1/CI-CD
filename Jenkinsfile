@@ -6,20 +6,18 @@ pipeline {
             git branch:'Testing' , url:'https://github.com/mansijain1knoldus/CI-CD-Capstone.git'
             }
       }
-      stage ('Production') {
+      stage ('Development') {
             steps {
-                echo 'Production is successful'
+               sh 'mvn clean package'
+                echo "Development is successful"
             }
-      }
+       }
       stage ('Testing') {
             steps {
+               sh 'mvn test'
                 echo "Testing is successful"
             }
       }
-      stage ('Development') {
-            steps {
-                echo "Development is successful"
-            }
-        }
+      
    }
 }
