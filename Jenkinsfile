@@ -8,7 +8,7 @@ pipeline {
       }
       stage ('Development') {
             steps {
-               sh 'mvn clean install -Dmaven.test.skip=true'
+               //sh 'mvn clean install -Dmaven.test.skip=true'
                echo "Development is successful"
             }
         }
