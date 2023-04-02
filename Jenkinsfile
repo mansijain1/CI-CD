@@ -1,11 +1,9 @@
 pipeline {
    agent any
+   tools{
+        maven "3.9.1"
+    }
    stages {
-      stage('clone'){
-         steps{
-            git branch:'Development' , url:'https://github.com/mansijain1knoldus/CI-CD-Capstone.git'
-         }
-      }
       stage ('Development') {
          steps {
             sh 'mvn clean package' 
@@ -18,11 +16,11 @@ pipeline {
             echo "Testing is successful"
          }
       }
-//       stage ('Production') {
-//          steps {
-//                 echo 'Production is successful'
-//             }
-//       }
+      stage ('Production') {
+         steps {
+                echo 'Production is successful'
+            }
+      }
       
      
    }
