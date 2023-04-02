@@ -1,11 +1,9 @@
 pipeline {
    agent any
+   tools{
+        maven "3.9.1"
+    }
    stages {
-      stage('clone'){
-         steps{
-            git branch:'Production' , url:'https://github.com/mansijain1knoldus/CI-CD-Capstone.git'
-         }
-      }
       stage ('Development') {
          steps {
             sh 'mvn clean package' 
@@ -20,8 +18,9 @@ pipeline {
       }
       stage ('Production') {
          steps {
-            deploy adapters: [tomcat9(credentialsId: 'TomcatCreds', path: '', url: 'http://3.27.9.223:7070/')], contextPath: 'capstoneapp', war: ''
-            echo 'Production is successful'
+            script{
+               deploy adapters: [tomcat9(credentialsId: 'TomcatCreds', path: '', url: 'http://3.27.9.223:7070/')], contextPath: 'capstoneapp', war: '**/*.war'
+               echo 'Production is successful'
             }
       }
       post{
